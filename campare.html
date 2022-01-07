@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Campare Text</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Campare </h2>
+   <div class="row">
+   <div class="col-md-12 card">
+   <div class="col-md-6">
+    <div class="form-group">
+      <label for="text">Description 1</label>
+      <textarea  class="form-control" id="description1" placeholder="Enter First Text" name="description1"></textarea>
+    </div>
+	</div>
+	<div class="col-md-6">
+    <div class="form-group">
+      <label for="text">Description 2</label>
+      <textarea  class="form-control" id="description2" placeholder="Enter Second Text" name="description2"></textarea>
+    </div>
+	</div>
+    </div>
+	<div class="col-md-6">
+	 <button type="button" class="btn btn-primary" id="submitbtn">Submit</button>
+    </div>
+	<div class="col-md-12">
+	<div id="result"></div>
+    </div>
+    </div>
+ </div>
+ <script>
+$( document ).ready(function() {
+ 	$('#submitbtn').click(function(){
+	 $('#result').html('');
+	 var messageHtml = "";
+	 var result =[];
+		var d1 = $('#description1').val();
+		var d2 = $('#description2').val();
+		
+		
+			if(d1!='' && d2!=''){
+				if(d1.length == d2.length){
+						if(d1==d2){
+						  result.push('<p>Nothing if the string remains unchanged.</p>');
+						 }else{
+						 alert('ddd');
+						
+					}
+				}else{
+				if(d1.length > d2.length){
+					if(d1.indexOf(d2) > -1){
+						console.log(d2 + " found");
+						var ret = d1.replace(d2,'');
+						if(ret!=''){
+							result.push('<p>* - |'+ret+'</p>');
+							result.push('<p>* if the string is changed</p>');
+							result.push('<p>- if the string exists in the first file but does not exist in the second</p>');
+						}
+					}else{
+					  result.push('<p>* '+ d1 +' | '+ d2 + '</p>');
+					  result.push('<p>* if the string is changed</p>');
+					
+					 }
+				}
+				else{
+				
+					if(d2.indexOf(d1) != -1){
+						console.log(d1 + " found");
+						var ret = d2.replace(d1,'');
+						if(ret!=''){
+							result.push('<p>* + |'+ret+'</p>');
+						}
+					}
+					result.push('<p>'+ d1 +' | '+ d2 + '</p>');
+				    result.push('<p>* if the string is changed</p>');
+					result.push('<p>+ if the string exists in the second file but does not exist in the first</p>');
+				}
+				}
+			}
+			
+		
+			result.forEach(function (message) {
+				messageHtml += message ;
+			});
+		$('#result').html(messageHtml);
+	});
+});</script>
+</body>
+</html>
